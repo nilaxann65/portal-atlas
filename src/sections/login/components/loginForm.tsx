@@ -8,20 +8,42 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { Link } from "lucide-react";
+import Link from "next/link";
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
     const { register, handleSubmit, errors, reset, login } = useFormLogin();
+    const { toast } = useToast();
+    const router = useRouter();
 
     async function onSubmit(data: User) {
         try {
             const result = await login(data);
-            console.log(result);
+            if (result.status === 200) {
+                toast({
+                    title: "Sesión iniciada",
+                    action: (
+                        <ToastAction altText="Cerrar">Cerrar</ToastAction>
+                    ),
+                });
+                router.push("/dashboard");
+                return;
+            }
+
+            toast({
+                title: "Error al iniciar sesión",
+                description: "Verifica tus credenciales",
+                action: (
+                    <ToastAction altText="Cerrar">Cerrar</ToastAction>
+                ),
+            });
+
         }
         catch (error) {
             console.log(error);
         }
-        reset();
     }
     return (
         <Card style={{
@@ -57,9 +79,9 @@ export default function LoginForm() {
                             <Checkbox id="rememberme" />
                             <Label htmlFor="rememberme">Recuerdame</Label>
                         </div>
-                        <div>
-                            <Label htmlFor="forgotpassword" style={{ textDecoration: 'underline' }}>¿Olvidaste tu contraseña?</Label>
-                        </div>
+                        <Link href="/dashboard" style={{ textDecoration: 'underline' }} className="text-sm">
+                            ¿Olvidaste tu contraseña?
+                        </Link>
                     </div>
                 </CardContent>
                 <CardFooter className="flex justify-between">
