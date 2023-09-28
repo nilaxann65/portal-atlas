@@ -1,9 +1,5 @@
-"use client";
-
 import { User } from "@/modules/person/domain/entities/user.entity";
 import { useFormLogin } from "../hooks/useFormLogin";
-import { InputEmail } from "@/lib/components/InputEmail";
-import { InputPassword } from "@/lib/components/InputPassword";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -12,9 +8,10 @@ import Link from "next/link";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
 
 export default function LoginForm() {
-    const { register, handleSubmit, errors, reset, login } = useFormLogin();
+    const { register, handleSubmit, errors, login } = useFormLogin();
     const { toast } = useToast();
     const router = useRouter();
 
@@ -46,9 +43,7 @@ export default function LoginForm() {
         }
     }
     return (
-        <Card style={{
-            width: "25rem"
-        }} >
+        <Card className="w-96">
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 autoComplete="off"
@@ -63,16 +58,24 @@ export default function LoginForm() {
                 </CardHeader>
                 <CardContent>
                     <div className="grid w-full items-center gap-4">
-                        <InputEmail
+                        <Input
+                            type="email"
+                            id="email"
                             label="Email"
-                            register={register("email")}
-                            error={errors?.email}
+                            placeholder="Ingresa tu email"
+                            {...register("email")}
+                            error={errors?.email?.message}
                         />
-                        <InputPassword
+                        <Input
+                            type="password"
+                            id="password"
                             label="Contraseña"
-                            register={register("password")}
-                            error={errors?.password}
+                            placeholder="Ingresa tu contraseña"
+                            {...register("password")}
+                            error={errors?.password?.message}
                         />
+
+
                     </div>
                     <div className="flex justify-between mt-1">
                         <div className="flex items-center space-x-2">

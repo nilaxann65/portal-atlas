@@ -1,5 +1,5 @@
+import { Navbar } from '@/lib/components/Navbar'
 import type { Metadata } from 'next'
-import { Navbar } from './Navbar/Navbar'
 
 export const metadata: Metadata = {
     title: 'Bienvenido',
@@ -13,10 +13,10 @@ export default function RootLayout({
 }) {
     return (
         <div>
-            <div className="flex flex-col items-center justify-center h-screen">
-                <Navbar />
+            <Navbar />
+            <div className="p-1 mt-14 sm:ml-64 overflow-y-auto">
                 {children}
             </div>
-        </div>
+        </div >
     )
 }

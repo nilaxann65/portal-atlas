@@ -1,7 +1,7 @@
 "use client";
 import { createUserRepository } from "@/modules/person/infrastructure/createUserRepository";
-import LoginForm from "@/sections/login/components/loginForm";
-import { LoginContextProvider } from "@/sections/login/context/loginContext";
+import LoginForm from "./_config/components/loginForm";
+import { LoginContextProvider } from "./_config/context/loginContext";
 
 export default function LoginPage() {
     const repository = createUserRepository();
