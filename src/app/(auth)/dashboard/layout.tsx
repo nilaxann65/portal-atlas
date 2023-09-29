@@ -1,5 +1,5 @@
-import { Navbar } from '@/lib/components/Navbar'
 import type { Metadata } from 'next'
+import { Navbar } from './_config/components/Navbar'
 
 export const metadata: Metadata = {
     title: 'Bienvenido',

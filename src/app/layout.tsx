@@ -2,7 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ThemeProvider } from './theme-provider'
-import { InitContextProvider } from '@/sections/init/initContext'
+import { AppContextProvider } from './_config/context/AppContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,11 +18,11 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-gray-1100 overflow-y-auto pb-36">
+      <body className={"bg-gray-1100 overflow-y-auto pb-36" + inter.className}>
         <ThemeProvider attribute='class' defaultTheme='dark' enableSystem>
-          <InitContextProvider>
+          <AppContextProvider>
             {children}
-          </InitContextProvider>
+          </AppContextProvider>
         </ThemeProvider>
       </body>
     </html >
